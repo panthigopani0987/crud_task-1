@@ -1,20 +1,25 @@
 const multer = require('multer');
-
 const path = require('path');
 
 const uploads = path.join('uploads');
 
-//file upload start
+// File upload start
 
 const storage = multer.diskStorage({
-    destination : (req,file,cb) => {
-        cb(null,uploads);
+    destination: (req, file, cb) => {
+        cb(null, uploads);
     },
-    filename : (req,file,cb)=> {
-        cb(null,file.originalname);
+    filename: (req, file, cb) => {
+        const fileExtension = path.extname(file.originalname);
+
+        const uniqueNumber = Date.now(); 
+
+        const newFileName = `${uniqueNumber}-${file.originalname}${fileExtension}`;
+
+        cb(null, newFileName);
     }
-})
+});
 
-const fileUpload = multer({storage : storage}).single('image');
+const fileUpload = multer({ storage: storage }).single('image');
 
-module.exports = fileUpload
+module.exports = fileUpload;

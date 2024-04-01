@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const creteSchema = mongoose.Schema({
+const creteSchema =new mongoose.Schema({
     name : {
         type : String,
         required : true,
@@ -8,6 +8,7 @@ const creteSchema = mongoose.Schema({
     email : {
         type : String,
         required : true,
+        unique : true
     },
     phone : {
         type : String,
